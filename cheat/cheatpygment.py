@@ -1,6 +1,6 @@
 import os
 
-from pygments.lexer import RegexLexer
+from pygments.lexer import RegexLexer, bygroups
 from pygments.style import Style
 from pygments.token import *
 from pygments import highlight
@@ -14,17 +14,27 @@ class CheatLexer(RegexLexer):
 
 	tokens = {
 		'root': [
-			(r'#.*\n', String),
-			(r'.*\n', Comment),
+			(r'.*\n', String),
+			(r'#.*\n', Comment),
+			(r'(\-.+?)[ \n]', bygroups(Keyword)),
+			(r'^\w+\s', Name),
 		]
 	}
 
+
+# Bold colors:
+# darkgray, red, green, yellow, fuchsia, turquoise, white
+
+# Light colors:
+# black, darkred, darkgreen, brown, darkblue, purple, teal, lightgray
+
 class CheatStyle(Style):
 	styles = {
-		String:		'#ansired',
-		Comment:	'#ansiblue',
+		String:		'#ansibrown',
+		Comment:	'#ansiteal',
+		Name:		'#ansired',
+		Keyword:	'#ansiwhite',
 	}
-
 
 
 def colorize(sheet_content):
@@ -48,4 +58,5 @@ def colorize(sheet_content):
         except Exception:
             pass
 
+    print('lexer =', lexer, 'style =', style)
     return highlight(sheet_content, lexer, Terminal256Formatter(style=style))
