@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+export PYTHONPATH=$(pwd):~/.local/lib/python3.6/site-packages/
+export CHEATCOLORS=yes
