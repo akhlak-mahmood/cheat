@@ -36,7 +36,10 @@ Examples:
 
 # require the dependencies
 from cheat import sheets, sheet
-from cheat.utils import colorize
+try:
+  from cheat.cheatpygment import colorize
+except:
+  from cheat.utils import colorize
 from docopt import docopt
 
 
